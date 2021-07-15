@@ -1,0 +1,203 @@
+<!--
+@description       : this is developer version of Query Builder
+@author            : Siddharth Patni
+@last modified on  : 07-06-2021
+@last modified by  : Siddharth Patni
+Modifications Log 
+Ver   Date         Author            Modification
+1.0   06-18-2021   Siddharth Patni   Initial Version
+-->
+<template>
+        <!-- Main container card -->
+        <lightning-card title="Make Your Query Now.. !!"  >
+                <div class="slds-m-top_small slds-m-left_medium slds-m-right_x-small slds-m-bottom_small" >
+                        <!-- Select type of query Aggregated / simple soql -->
+                        <lightning-combobox
+                                name="Query Type"
+                                label="Select Query Type"
+                                placeholder="Select Query Type"
+                                options={queryTypeOptions}
+                                onchange={handleQueryType} > </lightning-combobox>
+
+                        <!--object selection -->
+                        <lightning-combobox
+                                name="ObjectName"
+                                label="Select Object Name"
+                                placeholder="Select Object Name"
+                                options={objectList}
+                                onchange={handleObjectSelect}> </lightning-combobox>
+
+                        <!-- Simple SOQL Type Selected-->
+                        <template if:true={getQueryType}>
+                                <!--Fields selection box : will only be visible if some object is selected -->
+                                <template if:true={hasObjectSelected}>
+                                        <!--Field names to make query-->
+                                        <lightning-dual-listbox name="fieldNames"
+                                                label="Select Field(s) Name"
+                                                source-label="Available"
+                                                selected-label="Selected"
+                                                field-level-help="Select field to query on"
+                                                options={fieldList}
+                                                onchange={handleFieldSelection}></lightning-dual-listbox>
+                                        <!-- WHERE clause div start-->
+                                        <div class="c-container slds-grid slds-wrap slds-gutters slds-m-top_small" >
+                                                <!-- Loop to make multiple where conditions-->
+                                                <template for:each={numberOfWhere} for:item="where">
+                                                        <!-- Field name-->
+                                                        <div class="slds-col slds-size_1-of-4" key={where} >
+                                                                <lightning-combobox
+                                                                        name="Where Clause"
+                                                                        label="Add Condition"
+                                                                        placeholder="Select Field"
+                                                                        options={fieldList}
+                                                                        class="WhereQuery"> </lightning-combobox>
+                                                        </div>
+                                                        <!-- Operator -->
+                                                        <div class="slds-col slds-size_1-of-4" key={where}>
+                                                                <lightning-combobox
+                                                                        name="Where Clause"
+                                                                        label="Select Operator"
+                                                                        placeholder="Select Operator"
+                                                                        options={operators}
+                                                                        class="WhereQuery" > </lightning-combobox>
+                                                        </div>
+                                                        <!-- value to compare -->
+                                                        <div class="slds-col slds-size_1-of-4" key={where}>
+                                                                <lightning-input type="text" 
+                                                                        label="enter value" 
+                                                                        placeholder="write condition" 
+                                                                        class="WhereQuery"></lightning-input>
+                                                        </div>
+                                                        <!-- And/Or -->
+                                                        <div class="slds-col slds-size_1-of-4" key={where}>
+                                                                <lightning-combobox
+                                                                        name="AndOr"
+                                                                        label="And/Or"
+                                                                        placeholder="And/Or"
+                                                                        value=""
+                                                                        options={andOr}
+                                                                        class="WhereQuery"> </lightning-combobox>                                 
+                                                        </div>
+                                                </template>
+                                                <!-- Add more button to add new row of where condition-->
+                                                <div class="slds-col slds-size_1-of-8 slds-m-top_small" >
+                                                        <lightning-button name="Add More" label=" + " onclick={handleAddMoreWhere}></lightning-button>
+                                                </div>
+                                        </div>
+                                        <!-- WHERE clause div end-->
+
+                                        <!--ORDER BY div start-->
+                                        <div class="c-container slds-grid slds-gutters slds-m-top_small ">
+                                                <!-- Order by Field -->
+                                                <div class="slds-col slds-size_1-of-3">
+                                                        <lightning-combobox
+                                                                name="Order By Clause"
+                                                                label="Order By"
+                                                                placeholder="Select Field"
+                                                                options={fieldList}
+                                                                onchange={handleOrderBy} > </lightning-combobox>
+                                                </div>
+                                                <!-- Sorting Order -->
+                                                <div class="slds-col slds-size_1-of-3">
+                                                        <lightning-combobox
+                                                                name="Sort"
+                                                                label="Sort"
+                                                                placeholder="--Select--"
+                                                                options={sortOrders}
+                                                                onchange={handleSortOrder} > </lightning-combobox>
+                                                </div>
+                                                <!-- Placing null values Top/Bottom -->
+                                                <div class="slds-col slds-size_1-of-3">
+                                                        <lightning-combobox
+                                                                name="Place Null"
+                                                                label="Place Null"
+                                                                placeholder="--Select--"
+                                                                options={placeNull}
+                                                                onchange={handlePlaceNull} > </lightning-combobox>
+                                                </div>
+                                        </div> 
+                                        <!--Order By div end-->
+                                        <!-- div for -->
+                                        <div class="c-container slds-grid slds-gutters slds-m-top_small ">
+                                                <!--Group by
+                                                <div class="slds-col slds-size_1-of-2">
+                                                        <lightning-combobox
+                                                                name="Group by Clause"
+                                                                label="Group By"
+                                                                placeholder="Select Field"
+                                                                options={fieldList}
+                                                                onchange={handleGroupBy} > </lightning-combobox>
+                                                </div> -->
+                                                <!--LIMIT-->
+                                                <div class="slds-size_1-of-2 slds-col">
+                                                        <lightning-input type="text" label="Max Records" placeholder="Maximum records" onchange={handleTotalNumberOfRows}></lightning-input>
+                                                </div>
+                                        </div>                         
+                                </template>
+                                <!-- This button will be clicked to fire the query -->
+                                <template if:true={showFireButton} >
+                                        <div class="slds-m-top_small  slds-m-bottom_small">
+                                                <lightning-button name="Fire" label="Make Query" onclick={handleFireButton}></lightning-button>
+                                        </div>
+                                </template>
+                                <!-- Results template -->
+                                <template if:true={showResult}>
+                                        <!-- Query result card -->
+                                        <lightning-card title="Query Results">
+                                                <div style="height: 400px;" class="slds-m-top_large slds-m-left_x-small slds-m-small_x-large slds-m-bottom_small">
+                                                        <!-- Total number of records shown in lightning-datatable -->
+                                                        <span class="slds-form-element__label slds-text-title_bold">
+                                                                Displayed Records: {queryResult.length}</br>
+                                                        </span>
+                                                        <!-- showing records in lightning-datatable -->
+                                                        <lightning-datatable key-field="Id" 
+                                                                        data={queryResult} 
+                                                                        columns={columns} 
+                                                                        load-more-offset="20"
+                                                                        onloadmore={handleLoadMore} 
+                                                                        enable-infinite-loading 
+                                                                        hide-checkbox-column 
+                                                                        show-row-number-column
+                                                                        default-sort-direction={defaultSortDirection}
+                                                                        sorted-direction={sortDirection}
+                                                                        sorted-by={sortedBy}
+                                                                        onsort={onHandleSort}>
+                                                        </lightning-datatable>
+                                                </div>
+                                        </lightning-card>
+                                        <!-- Query result card end-->
+                                </template>
+                                <!-- Results template end -->
+                        </template>
+                        <!-- Aggregate Query Type Selected-->
+                        <template if:false={getQueryType}>
+                                <lightning-combobox
+                                        name="Aggregate Function"
+                                        label="Select An Aggregate Function"
+                                        placeholder="--Select A Function--"
+                                        options={aggregateFunctions}
+                                        onchange={handleAggregateFunction} > </lightning-combobox>
+                                <lightning-combobox
+                                        name="Aggreagte Function Field"
+                                        label="Select field For Aggregate Function"
+                                        placeholder="--Select A Function--"
+                                        options={fieldList}
+                                        onchange={handleAggregateFunctionField} > </lightning-combobox>
+                                <lightning-combobox
+                                        name="Group Field"
+                                        label="Group By Field"
+                                        placeholder="--Select Field--"
+                                        options={fieldList}
+                                        onchange={handleGroupingField} > </lightning-combobox>
+                                <div class="slds-m-top_x-small slds-m-bottom_small">
+                                        <lightning-button 
+                                                name="Fire Aggr Query"
+                                                label="Make Query"
+                                                onclick={handleAggrFire}></lightning-button>
+                                </div>
+                        </template>        
+                </div>
+        </lightning-card>
+        <!-- Main container card end -->
+</template>
+        
