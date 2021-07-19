@@ -1,0 +1,26 @@
+OR(
+    Not(
+        CONTAINS(            "AL:AK:AZ:AR:CA:CO:CT:DE:DC:FL:GA:HI:ID:IL:IN:IA:KS:KY:LA:ME:MD:MA:MI:MN:MS:MO:MT:NE:NV:NV:NH:NJ:NM:NY:NC:ND:OH:OK:OR:PA:RI:SC:SD:SD:TN:TX:UT:VT:VA:WA:WV:WI:WY",
+             BillingState )
+    ),
+    NOT(
+        OR(
+             BillingCountry ="US",
+            BillingCountry="USA",
+            BillingCountry="United States",
+            ISBLANK(BillingCountry)
+        )
+    )
+    Not(
+        CONTAINS(            "AL:AK:AZ:AR:CA:CO:CT:DE:DC:FL:GA:HI:ID:IL:IN:IA:KS:KY:LA:ME:MD:MA:MI:MN:MS:MO:MT:NE:NV:NV:NH:NJ:NM:NY:NC:ND:OH:OK:OR:PA:RI:SC:SD:SD:TN:TX:UT:VT:VA:WA:WV:WI:WY",
+              ShippingState  )
+    ),
+    NOT(
+        OR(
+              ShippingCountry  ="US",
+            ShippingCountry="USA",
+            ShippingCountry="United States",
+            ISBLANK(ShippingCountry)
+        )
+    )
+)

@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-28-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-28-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <lightning-card title="Query Results"  >
+        <div style="height: 400px;" class="slds-m-top_large slds-m-left_x-small slds-m-small_x-large slds-m-bottom_small">
+                <span class="slds-form-element__label slds-text-title_bold">
+                        Displayed Records: {queryResult.length}</br>
+                        <!--error: {error}-->
+                </span>
+                <lightning-datatable key-field="Id" 
+                                data={queryResult} 
+                                columns={columns} 
+                                load-more-offset="20"
+                                onloadmore={handleLoadMore} 
+                                enable-infinite-loading 
+                                hide-checkbox-column 
+                                show-row-number-column>
+                </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 07-02-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   07-02-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <lightning-card title="LibsChartjs" icon-name="custom:custom19">
+        <div class="chart slds-var-m-around_medium" lwc:dom="manual"></div>
+        <template if:true={error}>
+            <c-error-panel errors={error}></c-error-panel>
+        </template>
+        <c-view-source source="lwc/libsChartjs" slot="footer">
+            Use Chart.js in a Lightning Web component.
+        </c-view-source>
+    </lightning-card>
+</template>

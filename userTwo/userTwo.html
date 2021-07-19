@@ -1,0 +1,48 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-28-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-24-2021   Siddharth Patni   Initial Version
+-->
+<!--
+<template>
+    <lightning-card>
+        <div class="slds-var-p-around_small">
+            <div>
+                <span
+                    class="slds-form-element__label slds-text-title_bold slds-align_absolute-center">
+                    Infinite Loading Example</span>
+            </div>
+            <div>
+                <span class="slds-form-element__label slds-text-title_bold">
+                    Total Records: {totalNumberOfRows}</span>
+            </div>
+            <div>
+                <span class="slds-form-element__label slds-text-title_bold">
+                    Displayed Records: {data.length}</span>
+            </div>
+            <div class="slds-box" style="height: 400px;">
+                <lightning-datatable key-field="Id" data={data} columns={columns} load-more-offset="20"
+                    onloadmore={handleLoadMore} enable-infinite-loading hide-checkbox-column show-row-number-column>
+                </lightning-datatable>
+            </div>
+            {loadMoreStatus}
+        </div>
+    </lightning-card>
+</template>-->
+<template>
+    <lightning-datatable
+            key-field="id"
+            columns={columns}
+            data={data}
+            hide-checkbox-column
+            default-sort-direction={defaultSortDirection}
+            sorted-direction={sortDirection}
+            sorted-by={sortedBy}
+            onsort={onHandleSort}>
+    </lightning-datatable>
+</template>

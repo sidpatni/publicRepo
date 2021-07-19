@@ -1,0 +1,25 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-04-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-04-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <div class="wrapper">
+    <header class="header">Available Bikes for {name}</header>
+    <section class="content">
+        <div class="columns">
+        <main class="main" >
+            <c-list onproductselected={handleProductSelected}></c-list>
+        </main>
+        <aside class="sidebar-second">
+            <c-detail product-id={selectedProductId}></c-detail>
+        </aside>
+        </div>
+    </section>
+    </div>
+</template>

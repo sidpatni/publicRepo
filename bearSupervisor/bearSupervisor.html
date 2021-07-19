@@ -1,0 +1,30 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-11-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-11-2021   Siddharth Patni   Initial Version
+-->
+<template>
+	<lightning-card title="Supervisor" icon-name="standard:people">
+		<div class="slds-var-m-around_medium">
+			<!-- Show supervisor when bear is loaded -->
+			<template if:true={bear.data}>
+				<lightning-record-form
+					object-api-name="Contact"
+					record-id={supervisorId}
+					layout-type="Compact">
+				</lightning-record-form>
+			</template>
+			<!-- Data failed to load -->
+			<template if:true={bear.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the bear record
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>

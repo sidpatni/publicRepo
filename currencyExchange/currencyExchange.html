@@ -1,0 +1,36 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-17-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-16-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <div class="slds-grid slds-einstein-header slds-card__header">
+        <lightning-card title="Currency Converter" class="slds-box slds-size_3-of-5">
+            <div class="slds-p-left_x-small slds-p-right_x-small" >
+                <lightning-input label="From Currency" value={fromCur} placeholder="from currency" onchange={changeFromCur} type="text"></lightning-input>
+                <lightning-input label="To Currency" value={toCur} placeholder="to currency" onchange={changetoCur} type="text"></lightning-input>
+                <lightning-input label="Value" value ={value} placeholder=0 onchange={changeValue} type = "number"></lightning-input>
+                <div class="slds-p-top_x-small">
+                    <lightning-button onclick={handleClick} name="convert" label="Click Here To Convert"></lightning-button>
+                </div>
+            </div>
+        </lightning-card>
+
+            <lightning-card title="Result" class="slds-box slds-size_2-of-5 slds-p-left_xx-small" >
+                <template if:true={amount} >
+                    <p>  
+                        &nbsp;&nbsp;&nbsp; <lightning-formatted-number value={value} format-style="currency" currency-code={fromCur} ></lightning-formatted-number>
+                        &nbsp;is equal to &nbsp;
+                        <lightning-formatted-number value={amount} format-style="currency" currency-code={toCur}></lightning-formatted-number> 
+                    </p><br>
+                    <p class="slds-p-right_x-small slds-p-left_x-small" >      Thank you for using our service , want to try more ?</p>
+                </template>
+            </lightning-card>
+       
+    </div>
+</template>

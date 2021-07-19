@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-08-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-08-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <lightning-card title="Unit Status" icon-name="standard:bot">
+        <lightning-input
+        label="Unit Number"
+        value={unitNumber}
+        onchange={handleChange} >
+      </lightning-input>
+      <div class="slds-m-around_medium">
+        Unit {unitNumber} alive!
+      </div>
+    </lightning-card>
+  </template>

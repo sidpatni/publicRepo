@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-07-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-07-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <lightning-card title="ContactInformation" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+           <template for:each={contacts} for:item="contact">
+              <div key={contact.id}>
+                 {contact.Name}, {contact.Title}
+              </div>
+           </template>
+        </div>
+     </lightning-card>
+</template>

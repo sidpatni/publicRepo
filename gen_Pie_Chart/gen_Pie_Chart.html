@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 07-06-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   07-02-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <template if:true={hasData}>
+        <lightning-card title="Group By : Result" icon-name="utility:chart">
+            <div class="slds-p-around_small slds-grid slds-grid--vertical-align-center slds-grid--align-center">
+                <canvas class="pieChart" lwc:dom="manual"></canvas>
+            </div>
+        </lightning-card>
+    </template>
+</template>

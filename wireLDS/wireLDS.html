@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-08-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-08-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <lightning-card title="Wire Lightning Data Service" icon-name="custom:custom108">
+        <template if:true={account.data}>
+          <p class="accountName">Account Name: {name}</p>
+          <p class="accountIndustry">Industry: {industry}</p>
+          <p class="accountPhone">Phone: {phone}</p>
+          <p class="accountOwner">Owner: {owner}</p>
+        </template>
+        <template if:true={account.error}>
+          <p>No account found.</p>
+        </template>
+      </lightning-card>
+</template>

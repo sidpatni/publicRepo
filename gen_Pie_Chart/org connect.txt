@@ -1,0 +1,10 @@
+org connect
+without code integration
+Git explored
+
+
+
+ PAT : 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
+
+ ssh-keygen -t ed25519 -C "sidpatni@concret.io"
+ SHA256:yx6ONYPM3Ck+T1FBlaymwhOhjneoR9q5gUBblc5Itvc sidpatni@concret.io

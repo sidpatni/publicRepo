@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 07-05-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   07-02-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <div class="slds-p-around_small slds-grid slds-grid--vertical-align-center slds-grid--align-center">
+        <canvas class="barChart" lwc:dom="manual"></canvas>
+        <div if:false={isChartJsInitialized} class="slds-col--padded slds-size--1-of-1">
+            <lightning-spinner alternative-text="Loading" size="medium" variant="base"></lightning-spinner>
+            <p>{chartConfig}</p>
+        </div>
+    </div>
+</template>

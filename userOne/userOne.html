@@ -1,0 +1,31 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 06-21-2021
+  @last modified by  : Siddharth Patni
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   06-15-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <!--
+    <lightning-card>
+        <p>
+            received : {messageRec}
+        </p>
+    </lightning-card>
+    <lightning-card>
+        <lightning-input type="string " label="typeMsg" value={messageToSend} placeholder="type message to send" > 
+            Send :
+        </lightning-input>
+        <lightning-button label="send" onclick={sendMsg} name="send"></lightning-button>
+    </lightning-card>-->
+    <lightning-checkbox-group name="Checkbox Group"
+                              label="Checkbox Group"
+                              options={options}
+                              value={value}
+                              onchange={handleChange}></lightning-checkbox-group>
+    <p>Selected Values are: {selectedValues}</p>
+    
+</template>
